@@ -1,14 +1,19 @@
 # yetanotheroscmovieplayer
 play videofiles fullscreen via opensound control messages
 
+precompiled for osx (64bit) and raspberry pi (jessie).
+
 written during my artist-in-residency at [Anglia Ruskin University](http://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016. built with [openFrameworks](http://openframeworks.cc) v0.9.2 and tested on osx 10.10.5.
 
 how to
 --
 
 * download and extract the zip from http://github.com/redFrik/yetanotheroscmovieplayer
-* copy your own image and/or movie files into the **data** directory
-* on osx double click the file **yetanotheroscmovieplayer_osx.app**
+* copy your own images and/or movie files into the **data** directory
+* double click the file application file and a black window should fill the screen
+  * on osx: the application is called **yetanotheroscmovieplayer_osx.app**
+  * on rpi: the application is called **yetanotheroscmovieplayer_rpi**
+  * on rpi you can also start it from terminal with: `./yetanotheroscmovieplayer_rpi`
 * start sending osc commands from python, javascript, puredata, supercollider or whatever - see testcode below
 
 osc protocol
@@ -52,3 +57,28 @@ n.sendMsg(\mode, 1)  //no scaling (original dimensions)
 n.sendMsg(\mode, 2)  //scale to fit width (crop height)
 n.sendMsg(\mode, 3)  //scale to fit height (crop width)
 ```
+
+(advanced) build instructions
+--
+this simple application was built using openFrameworks and you can easily modify it and/or build it for other operating systems that oF supports.
+
+* download and install [openFrameworks](http://openframeworks.cc/download/) for your platform.
+* follow the oF setup guide and make sure you can compile example projects.
+* on osx:
+  * copy the folder `yetanotheroscmovieplayer_osx` into `of_v0.9.2_osx_release/apps/myApps/`
+  * open the file `yetanotheroscmovieplayer_osx.xcodeproj` in xcode
+  * make sure the target is `yetanotheroscmovieplayer_osx Release`
+  * build
+  * the resulting application will be in the `bin` folder
+* on rpi:
+  * copy the folder `yetanotheroscmovieplayer_rpi` into `of_v0.9.2_osx_release/apps/myApps/`
+  * cd to this folder and type `make -j4`
+  * the resulting application will be in the `bin` folder
+
+
+TODO
+--
+* test build instructions for osx and for rpi
+* test on 3,5 tft display
+* nodejs example
+* puredata example

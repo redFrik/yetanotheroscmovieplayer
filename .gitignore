@@ -40,7 +40,7 @@ tests/**/gcc-release/
 *.mode*
 *.app/
 !yetanotheroscmovieplayer_osx.app/*
-yetanotheroscmovieplayer_rpi/bin/yetanotheroscmovieplayer_rpi
+sourcecode/yetanotheroscmovieplayer_rpi/bin/yetanotheroscmovieplayer_rpi
 *.pyc
 .svn/
 *.log
