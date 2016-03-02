@@ -1,6 +1,8 @@
 //first cd to this directory and
 npm install
 
+//if you don’t have npm first install that with sudo apt-get install npm
+
 //then start the yetanotheroscmovieplayer application
 //here we assume the app is running locally (127.0.0.1)
 
@@ -12,15 +14,35 @@ node stop.js
 
 
 //interactive examples (start by typing 'node' in terminal)
-osc= require('node-osc')
-client= new osc.Client('127.0.0.1', 61000)
-client.send('/start', 'kjhkjh.png', 10)  //fade in a still image
-client.send('/stop', 10)
-client.send('/start', 'yetanotherdemo.mov', 100, 0)  //loop off (0= no loop, 1= normal loop, 2= palindrome)
-client.send('/info')  //toggle info (also key 'i')
-client.send('/fps', 15)  //set framerate
-client.send('/speed', 0.5)  //set playback rate
-client.send('/mode', 0)  //fill screen (ignore original aspect ratio)
-client.send('/mode', 1)  //no scaling (original dimensions)
-client.send('/mode', 2)  //scale to fit width (crop height)
-client.send('/mode', 3)  //scale to fit height (crop width)
+udp= require('dgram')
+osc= require('osc-min')
+sck= udp.createSocket('udp4')
+
+buf= osc.toBuffer({address:'/start', args:['kjhkjh.png', 10]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //fade in a still image
+
+buf= osc.toBuffer({address:'/stop', args:[10]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')
+
+buf= osc.toBuffer({address:'/start', args:['yetanotherdemo.mov', 100, 0]})  //loop off (0= no loop, 1= normal loop, 2= palindrome)
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')
+
+buf= osc.toBuffer({address:'/info'})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //toggle info (also key 'i')
+
+buf= osc.toBuffer({address:'/fps', args:[15]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //set framerate
+
+buf= osc.toBuffer({address:'/speed', args:[0.5]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //set playback rate
+
+buf= osc.toBuffer({address:'/mode', args:[0]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //fill screen (ignore original aspect ratio)
+buf= osc.toBuffer({address:'/mode', args:[1]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //no scaling (original dimensions)
+buf= osc.toBuffer({address:'/mode', args:[2]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //scale to fit width (crop height)
+buf= osc.toBuffer({address:'/mode', args:[3]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //scale to fit height (crop width)
+
+sck.close()

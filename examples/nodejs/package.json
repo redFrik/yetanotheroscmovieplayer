@@ -9,6 +9,6 @@
   "author": "Fredrik Olofsson",
   "license": "MIT",
   "dependencies": {
-    "node-osc": "^1.2.0"
+    "osc-min": "*"
   }
 }
