@@ -1,0 +1,15 @@
+{
+  "name": "webpage",
+  "version": "1.0.0",
+  "description": "test for yetanotheroscmovieplayer",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fredrik Olofsson",
+  "license": "MIT",
+  "dependencies": {
+    "osc-min": "*",
+    "socket.io": "*"
+  }
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Fredrik Olofsson">
+    <meta name="description" content="test webpage for yetanotheroscmovieplayer">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>yetanotheroscmovieplayer webpage example</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>yetanotheroscmovieplayer</h1>
+    <br>/start
+    <input type="text" id="fileName" value="yetanotherdemo.mov">
+    <input type="number" id="fadeIn" value="100">
+    <input type="number" id="loopMode" value="1">
+    <button id="sendStart">send</button>
+    <br>/stop
+    <input type="number" id="fadeOut" value="200">
+    <button id="sendStop">send</button>
+    <br>/info
+    <button id="sendInfo">send</button>
+    <br>/fps
+    <input type="number" id="fps" value="60">
+    <button id="sendFps">send</button>
+    <br>/speed
+    <input type="number" id="speed" value="1.0">
+    <button id="sendSpeed">send</button>
+    <br>/mode
+    <input type="number" id="mode" value="0">
+    <button id="sendMode">send</button>
+
+    <script>
+    var socket = io.connect();
+    document.getElementById('sendStart').addEventListener('click', function() {
+        socket.emit('start', {
+            fileName: document.getElementById('fileName').value,
+            fadeIn: document.getElementById('fadeIn').value,
+            loopMode: document.getElementById('loopMode').value.trim()
+        });
+    });
+    document.getElementById('sendStop').addEventListener('click', function() {
+        socket.emit('stop', {
+            fadeOut: document.getElementById('fadeOut').value
+        });
+    });
+    document.getElementById('sendInfo').addEventListener('click', function() {
+        socket.emit('info', {});
+    });
+    document.getElementById('sendFps').addEventListener('click', function() {
+        socket.emit('fps', {
+            fps: document.getElementById('fps').value
+        });
+    });
+    document.getElementById('sendSpeed').addEventListener('click', function() {
+        socket.emit('speed', {
+            speed: document.getElementById('speed').value
+        });
+    });
+    document.getElementById('sendMode').addEventListener('click', function() {
+        socket.emit('mode', {
+            mode: document.getElementById('mode').value
+        });
+    });
+    </script>
+</body>
+</html>

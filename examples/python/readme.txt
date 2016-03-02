@@ -1,6 +1,12 @@
 //first cd to this directory and
 pip install pyosc
 
+//if you’re on raspbian jessie you might need to install pyosc like this:
+git clone https://github.com/ptone/pyosc.git --depth 1
+cd pyosc
+sudo ./setup.py install
+cd ..
+
 //then start the yetanotheroscmovieplayer application
 //here we assume the app is running locally (127.0.0.1)
 
