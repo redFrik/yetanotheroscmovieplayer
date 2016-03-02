@@ -1,9 +1,9 @@
 # yetanotheroscmovieplayer
 play videofiles fullscreen via opensound control messages
 
-precompiled for osx (64bit) and raspberry pi (jessie).
+precompiled for **mac osx** (64bit) and **raspberry pi** (jessie).
 
-written during my artist-in-residency at [Anglia Ruskin University](http://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016. built with [openFrameworks](http://openframeworks.cc) v0.9.2 and tested on osx 10.10.5.
+written during my artist-in-residency at [Anglia Ruskin University](http://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016. built with [openFrameworks](http://openframeworks.cc) v0.9.2. tested on osx 10.10.5 and rpi2 raspbian-jessie.
 
 how to
 --
