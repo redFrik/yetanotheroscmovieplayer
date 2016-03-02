@@ -7,9 +7,9 @@ how to
 --
 
 * download and extract the zip from http://github.com/redFrik/yetanotheroscmovieplayer
-* on osx double click the file **yetanotheroscmovieplayer_osx.app**
 * copy your own image and/or movie files into the **data** directory
-* start sending osc commands from python, javascript, puredata, supercollider or whatever - see below
+* on osx double click the file **yetanotheroscmovieplayer_osx.app**
+* start sending osc commands from python, javascript, puredata, supercollider or whatever - see testcode below
 
 osc protocol
 --
@@ -24,6 +24,12 @@ send opensoundcontrol messages to **port 61000**
 /fps, framespersecond
 /info, status
 ```
+
+notes
+--
+
+* palindrome looping does not yet work in the raspberry pi version.
+* negative speed (backwards) does not yet work in the raspberry pi version.
 
 testcode
 --
