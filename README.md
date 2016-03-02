@@ -1,18 +1,20 @@
 # yetanotheroscmovieplayer
 play videofiles fullscreen via opensound control messages
 
-written during my artist-in-residency at [Anglia Ruskin University](http://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016
+written during my artist-in-residency at [Anglia Ruskin University](http://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016. built with [openFrameworks](http://openframeworks.cc) v0.9.2 and tested on osx 10.10.5.
 
-built with [openFrameworks](http://openframeworks.cc) v0.9.2 and tested on osx 10.10.5.
+how to
+--
 
-`git clone http://github.com/redFrik/yetanotheroscmovieplayer`
-
-copy your own image and/or movie files into the **data** directory.
+* download and extract the zip from http://github.com/redFrik/yetanotheroscmovieplayer
+* on osx double click the file **yetanotheroscmovieplayer_osx.app**
+* copy your own image and/or movie files into the **data** directory
+* start sending osc commands from python, javascript, puredata, supercollider or whatever - see below
 
 osc protocol
 --
 
-send opensoundcontrol messages to port 61000
+send opensoundcontrol messages to **port 61000**
 
 ```
 /start, moviefilename, fadeinframes, loopmode
@@ -39,8 +41,8 @@ n.sendMsg(\start, "yetanotherdemo.mov", 100, 2)  //loop palindrome (0= no loop, 
 n.sendMsg(\info)  //toggle info (also key 'i')
 n.sendMsg(\fps, 15)  //set framerate
 n.sendMsg(\speed, 0.75)  //set playback rate
-n.sendMsg(\mode, 0)  //fill screen (ignores aspect ratio)
+n.sendMsg(\mode, 0)  //fill screen (ignore original aspect ratio)
 n.sendMsg(\mode, 1)  //no scaling (original dimensions)
-n.sendMsg(\mode, 2)  //width (crop or blank height)
-n.sendMsg(\mode, 3)  //height (crop or blank height)
+n.sendMsg(\mode, 2)  //scale to fit width (crop height)
+n.sendMsg(\mode, 3)  //scale to fit height (crop width)
 ```
