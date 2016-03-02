@@ -1,0 +1,48 @@
+#N canvas 132 45 669 472 10;
+#X obj 41 111 udpsend;
+#X msg 41 56 connect 127.0.0.1 61000;
+#X obj 55 84 packOSC;
+#X msg 167 303 /info \$1;
+#X obj 167 286 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 206 95 filename should match a movie or image file in the data
+directory;
+#X text 409 121 fade in over 200 frames;
+#X msg 211 141 /stop 300;
+#X text 283 141 fade out over 300 frames;
+#X msg 211 122 /start yetanotherdemo.mov 200 1;
+#X msg 167 265 /fps \$1;
+#X floatatom 167 249 5 1 99 0 - - -, f 5;
+#X text 17 21 install the mrpeach library for osc to work;
+#X floatatom 167 324 5 0 0 0 - - -, f 5;
+#X msg 167 340 /speed \$1;
+#X floatatom 167 362 5 0 0 0 - - -, f 5;
+#X msg 167 378 /mode \$1;
+#X text 235 374 display mode;
+#X text 235 336 set playback rate;
+#X text 232 254 set framerate;
+#X text 233 295 toggle info (also key 'i');
+#X text 261 390 0 - fill screen (ignore original aspect ratio) 1 -
+no scaling (original dimensions) 2 - scale to fit width (crop height)
+3 - scale to fit height (crop width);
+#X text 337 157 (0= no loop \, 1= normal loop \, 2= palindrome);
+#X msg 189 207 /stop 10;
+#X msg 189 188 /start kjhkjh.png 10;
+#X text 322 187 fade in a still image;
+#X text 261 207 fade out over 10 frames;
+#X obj 478 20 import mrpeach;
+#X text 475 41 for pd-extended;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 2 0;
+#X connect 4 0 3 0;
+#X connect 7 0 2 0;
+#X connect 9 0 2 0;
+#X connect 10 0 2 0;
+#X connect 11 0 10 0;
+#X connect 13 0 14 0;
+#X connect 14 0 2 0;
+#X connect 15 0 16 0;
+#X connect 16 0 2 0;
+#X connect 23 0 2 0;
+#X connect 24 0 2 0;

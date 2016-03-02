@@ -39,19 +39,21 @@ notes
 testcode
 --
 
+(also see `examples` folder)
+
 ```
 //--supercollider
 n= NetAddr("127.0.0.1", 61000)
-n.sendMsg(\start, "yetanotherdemo.mov")  //filename should match a movie or image file in bin/ directory
+n.sendMsg(\start, "yetanotherdemo.mov")  //filename should match a movie or image file in the data/ directory
 n.sendMsg(\stop)
 n.sendMsg(\start, "yetanotherdemo.mov", 200)  //fade in over 200 frames
-n.sendMsg(\stop, 400)  //fade out over 400 frames
+n.sendMsg(\stop, 300)  //fade out over 300 frames
 n.sendMsg(\start, "kjhkjh.png", 10)  //fade in a still image
 n.sendMsg(\stop, 10)
-n.sendMsg(\start, "yetanotherdemo.mov", 100, 2)  //loop palindrome (0= no loop, 1= normal loop, 2= palindrome)
+n.sendMsg(\start, "yetanotherdemo.mov", 100, 0)  //loop off (0= no loop, 1= normal loop, 2= palindrome)
 n.sendMsg(\info)  //toggle info (also key 'i')
 n.sendMsg(\fps, 15)  //set framerate
-n.sendMsg(\speed, 0.75)  //set playback rate
+n.sendMsg(\speed, 0.5)  //set playback rate
 n.sendMsg(\mode, 0)  //fill screen (ignore original aspect ratio)
 n.sendMsg(\mode, 1)  //no scaling (original dimensions)
 n.sendMsg(\mode, 2)  //scale to fit width (crop height)
@@ -68,7 +70,7 @@ this simple application was built using openFrameworks and you can easily modify
   * copy the folder `yetanotheroscmovieplayer_osx` into `of_v0.9.2_osx_release/apps/myApps/`
   * open the file `yetanotheroscmovieplayer_osx.xcodeproj` in xcode
   * make sure the target is `yetanotheroscmovieplayer_osx Release`
-  * build
+  * build (cmd+b)
   * the resulting application will be in the `bin` folder
 * on rpi:
   * copy the folder `yetanotheroscmovieplayer_rpi` into `of_v0.9.2_osx_release/apps/myApps/`
@@ -78,7 +80,4 @@ this simple application was built using openFrameworks and you can easily modify
 
 TODO
 --
-* test build instructions for osx and for rpi
 * test on 3,5 tft display
-* nodejs example
-* puredata example
