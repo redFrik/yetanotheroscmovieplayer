@@ -16,6 +16,10 @@ void ofApp::setup(){
     type= NOTSET;
     ow= 0;
     oh= 0;
+    x= 0;
+    y= 0;
+    w= ofGetScreenWidth();
+    h= ofGetScreenHeight();
     info= false;
     cout<<"listening on port: "<<PORT<<"\n";
     cout<<"screen resolution: "<<ofGetScreenWidth()<<"x"<<ofGetScreenHeight()<<"\n";
@@ -30,17 +34,17 @@ void ofApp::update() {
         message= oscMsgToString(num, adr, msg);
         if(adr=="/start") {
             if(num>0) {
-                videoPlayer.stop();
                 fileName= msg.getArgAsString(0);
                 if(fileName==fileLast || (ofFile::doesFileExist(fileName)==true)) {
                     loopMode= 1;        //default loopmode
                     steps= 255.f;      //default no fade in (255 per frame)
                     if(num>1) {
                         steps= 255.f/fmax(msg.getArgAsInt(1), 1.f);
-                        cout<<"steps:"<<steps<<"\n";
                     }
                     if(isImage(fileName) && (fileName!=fileLast)) {
                         type= IMAGE;
+                        videoPlayer.stop();
+                        videoPlayer.closeMovie();
                         stillImage.load(fileName);
                         frames= 1;
                         ow= stillImage.getWidth();
@@ -48,6 +52,8 @@ void ofApp::update() {
                     } else {
                         if(fileName!=fileLast) {
                             type= MOVIE;
+                            videoPlayer.stop();
+                            videoPlayer.closeMovie();
                             videoPlayer.load(fileName);
                             frames= videoPlayer.getTotalNumFrames();
                             if(num>2) {
@@ -87,6 +93,31 @@ void ofApp::update() {
             if(num>0) {
                 modes m[4] = {SCALE, ORIGINAL, WIDTH, HEIGHT};
                 mode= m[msg.getArgAsInt(0)];
+                if(mode==SCALE) {
+                    x= 0;
+                    y= 0;
+                    w= ofGetScreenWidth();
+                    h= ofGetScreenHeight();
+                } else if(mode==ORIGINAL) {
+                    x= (ofGetScreenWidth()-ow)*0.5;
+                    y= (ofGetScreenHeight()-oh)*0.5;
+                    w= ow;
+                    h= oh;
+                } else if(mode==WIDTH) {
+                    float factor= ofGetScreenWidth()/float(ow);
+                    int nh= oh*factor;
+                    x= 0;
+                    y= (ofGetScreenHeight()-nh)*0.5;
+                    w= ofGetScreenWidth();
+                    h= nh;
+                } else if(mode==HEIGHT) {
+                    float factor= ofGetScreenHeight()/float(oh);
+                    int nw= ow*factor;
+                    x= (ofGetScreenWidth()-nw)*0.5;
+                    y= 0;
+                    w= nw;
+                    h= ofGetScreenHeight();
+                }
             }
         } else if(adr=="/fps") {
             if(num>0) {
@@ -125,32 +156,6 @@ void ofApp::update() {
 }
 void ofApp::draw(){
     ofSetColor(255, 255, 255, alpha);
-    int x, y, w, h;
-    if(mode==SCALE) {
-        x= 0;
-        y= 0;
-        w= ofGetScreenWidth();
-        h= ofGetScreenHeight();
-    } else if(mode==ORIGINAL) {
-        x= (ofGetScreenWidth()-ow)*0.5;
-        y= (ofGetScreenHeight()-oh)*0.5;
-        w= ow;
-        h= oh;
-    } else if(mode==WIDTH) {
-        float factor= ofGetScreenWidth()/float(ow);
-        int nh= oh*factor;
-        x= 0;
-        y= (ofGetScreenHeight()-nh)*0.5;
-        w= ofGetScreenWidth();
-        h= nh;
-    } else if(mode==HEIGHT) {
-        float factor= ofGetScreenHeight()/float(oh);
-        int nw= ow*factor;
-        x= (ofGetScreenWidth()-nw)*0.5;
-        y= 0;
-        w= nw;
-        h= ofGetScreenHeight();
-    }
     if((type==MOVIE)&&(state!=STOPPED)) {
         videoPlayer.draw(x, y, w, h);
     } else if((type==IMAGE)&&(state!=STOPPED)) {

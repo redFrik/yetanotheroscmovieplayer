@@ -52,6 +52,7 @@ public:
     float alpha;        //current alphachannel for fading
     float steps;        //number of alpha steps per frame for fading in/out
     int ow, oh;         //original media dimensions
+    int x, y, w, h;     //drawing dimensions
     bool info;          //display info flag
     states state;       //program state
     media type;         //which file type - movie, still image or not found

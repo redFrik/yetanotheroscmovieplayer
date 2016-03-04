@@ -38,6 +38,8 @@ notes
 * negative speed (backwards) does not yet work in the raspberry pi version.
 * use the rpitft version if you have a tft display like Adafruit's [PiTFT Plus](https://www.adafruit.com/products/2441)
 * also for the rpitft version to avoid flicker you will want to log out and exit the raspbian desktop before starting this app (via ssh or startup script).
+* on rpi to automatically start at boot type `sudo crontab -e` and add `@reboot /home/pi/Downloads/yetanotheroscmovieplayer-master/yetanotheroscmovieplayer_rpi` to the end.
+* and to hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
 
 testcode
 --
