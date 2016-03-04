@@ -38,9 +38,8 @@ tests/**/[Rr]elease*/
 tests/**/gcc-debug/
 tests/**/gcc-release/
 *.mode*
-*.app/
-!yetanotheroscmovieplayer_osx.app/*
-sourcecode/yetanotheroscmovieplayer_rpi/bin/yetanotheroscmovieplayer_rpi
+sourcecode/*/bin/*
+examples/**/node_modules/*
 *.pyc
 .svn/
 *.log

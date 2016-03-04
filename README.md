@@ -14,6 +14,7 @@ how to
   * on osx: the application is called **yetanotheroscmovieplayer_osx.app**
   * on rpi: the application is called **yetanotheroscmovieplayer_rpi**
   * on rpi you can also start it from terminal with: `./yetanotheroscmovieplayer_rpi`
+  * there is also a special rpitft version for using with small TFT displays
 * start sending osc commands from python, javascript, puredata, supercollider or whatever - see testcode below
 
 osc protocol
@@ -22,7 +23,7 @@ osc protocol
 send opensoundcontrol messages to **port 61000**
 
 ```
-/start, moviefilename, fadeinframes, loopmode
+/start, filename, fadeinframes, loopmode
 /stop, fadeoutframes
 /speed, playbackrate
 /mode, scalingmode
@@ -35,6 +36,7 @@ notes
 
 * palindrome looping does not yet work in the raspberry pi version.
 * negative speed (backwards) does not yet work in the raspberry pi version.
+* use the rpitft version if you have a tft display like Adafruit's [PiTFT Plus](https://www.adafruit.com/products/2441)
 
 testcode
 --
@@ -73,11 +75,7 @@ this simple application was built using openFrameworks and you can easily modify
   * build (cmd+b)
   * the resulting application will be in the `bin` folder
 * on rpi:
-  * copy the folder `yetanotheroscmovieplayer_rpi` into `of_v0.9.2_osx_release/apps/myApps/`
+  * copy the folder `yetanotheroscmovieplayer_rpi` into `openFrameworks/apps/myApps/`
   * cd to this folder and type `make -j4`
   * the resulting application will be in the `bin` folder
-
-
-TODO
---
-* test on 3,5 tft display
+  * use the `yetanotheroscmovieplayer_rpitft` for tft screens. also install the [ofxPiTFT](http://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
