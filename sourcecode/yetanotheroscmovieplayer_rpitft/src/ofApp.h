@@ -45,9 +45,10 @@ public:
     string stateToString(states state);
     string modeToString(modes mode);
     string message;
-    string fileName;    //current movie
+    string fileName;    //current file
+    string fileLast;    //last loaded file
     int loopMode;       //current type of looping
-    int frames;         //number of frames in movie
+    int frames;         //number of frames in file
     float speed;        //current playback rate
     float alpha;        //current alphachannel for fading
     float steps;        //number of alpha steps per frame for fading in/out
@@ -56,5 +57,6 @@ public:
     states state;       //program state
     media type;         //which file type - movie, still image or not found
     modes mode;         //how to crop or scale the image
+    
     ofxPiTFT    piTft;
 };

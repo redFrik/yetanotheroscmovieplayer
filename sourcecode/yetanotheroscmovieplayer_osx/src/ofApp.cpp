@@ -32,38 +32,41 @@ void ofApp::update() {
             if(num>0) {
                 videoPlayer.stop();
                 fileName= msg.getArgAsString(0);
-                if(ofFile::doesFileExist(fileName)==true) {
+                if(fileName==fileLast || (ofFile::doesFileExist(fileName)==true)) {
                     loopMode= 1;        //default loopmode
                     steps= 255.f;      //default no fade in (255 per frame)
                     if(num>1) {
                         steps= 255.f/fmax(msg.getArgAsInt(1), 1.f);
                         cout<<"steps:"<<steps<<"\n";
                     }
-                    if(isImage(fileName)) {
+                    if(isImage(fileName) && (fileName!=fileLast)) {
                         type= IMAGE;
                         stillImage.load(fileName);
                         frames= 1;
                         ow= stillImage.getWidth();
                         oh= stillImage.getHeight();
                     } else {
-                        type= MOVIE;
-                        videoPlayer.load(fileName);
-                        frames= videoPlayer.getTotalNumFrames();
-                        if(num>2) {
-                            loopMode= msg.getArgAsInt(2);
-                        }
-                        if(loopMode==1) {
-                            videoPlayer.setLoopState(OF_LOOP_NORMAL);
-                        } else if(loopMode==2) {
-                            videoPlayer.setLoopState(OF_LOOP_PALINDROME);
-                        } else {
-                            videoPlayer.setLoopState(OF_LOOP_NONE);
+                        if(fileName!=fileLast) {
+                            type= MOVIE;
+                            videoPlayer.load(fileName);
+                            frames= videoPlayer.getTotalNumFrames();
+                            if(num>2) {
+                                loopMode= msg.getArgAsInt(2);
+                            }
+                            if(loopMode==1) {
+                                videoPlayer.setLoopState(OF_LOOP_NORMAL);
+                            } else if(loopMode==2) {
+                                videoPlayer.setLoopState(OF_LOOP_PALINDROME);
+                            } else {
+                                videoPlayer.setLoopState(OF_LOOP_NONE);
+                            }
                         }
                         videoPlayer.play();
                         ow= videoPlayer.getWidth();
                         oh= videoPlayer.getHeight();
                     }
                     state= FADEIN;
+                    fileLast= fileName;
                 } else {
                     cout<<"file "<<fileName<<" not found\n";
                     type= NOTFOUND;

@@ -37,6 +37,7 @@ notes
 * palindrome looping does not yet work in the raspberry pi version.
 * negative speed (backwards) does not yet work in the raspberry pi version.
 * use the rpitft version if you have a tft display like Adafruit's [PiTFT Plus](https://www.adafruit.com/products/2441)
+* also for the rpitft version to avoid flicker you will want to log out and exit the raspbian desktop before starting this app (via ssh or startup script).
 
 testcode
 --
@@ -76,6 +77,6 @@ this simple application was built using openFrameworks and you can easily modify
   * the resulting application will be in the `bin` folder
 * on rpi:
   * copy the folder `yetanotheroscmovieplayer_rpi` into `openFrameworks/apps/myApps/`
-  * cd to this folder and type `make -j4`
+  * cd to that folder and type `make -j4`
   * the resulting application will be in the `bin` folder
-  * use the `yetanotheroscmovieplayer_rpitft` for tft screens. also install the [ofxPiTFT](http://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
+  * use `yetanotheroscmovieplayer_rpitft` to build for tft screens. also install the [ofxPiTFT](http://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
