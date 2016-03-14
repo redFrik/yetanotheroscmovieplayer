@@ -5,11 +5,16 @@ precompiled for **mac osx** (64bit) and **raspberry pi** (jessie).
 
 written during my artist-in-residency at [Anglia Ruskin University](http://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016. built with [openFrameworks](http://openframeworks.cc) v0.9.2. tested on osx 10.10.5 and rpi2 raspbian-jessie.
 
-how to
+installation
 --
 
 * download and extract the zip from http://github.com/redFrik/yetanotheroscmovieplayer
+* open a terminal window and type `sudo apt-get install libfreeimage-dev`
 * copy your own images and/or movie files into the **data** directory
+
+running
+--
+
 * double click the file application file and a black window should fill the screen
   * on osx: the application is called **yetanotheroscmovieplayer_osx.app**
   * on rpi: the application is called **yetanotheroscmovieplayer_rpi**
@@ -17,10 +22,10 @@ how to
   * there is also a special rpitft version for using with small TFT displays
 * start sending osc commands from python, javascript, puredata, supercollider or whatever - see testcode below
 
-osc protocol
+protocol
 --
 
-send opensoundcontrol messages to **port 61000**
+send opensoundcontrol (osc) messages to **port 61000**
 
 ```
 /start, filename, fadeinframes, loopmode

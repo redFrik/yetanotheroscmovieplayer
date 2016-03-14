@@ -1,5 +1,6 @@
 //--supercollider
-n= NetAddr("127.0.0.1", 61000)
+n= NetAddr("raspberrypi.local", 61000)  //if app is running on a rpi
+n= NetAddr("127.0.0.1", 61000)  //if app is running locally on this mac
 n.sendMsg(\start, "yetanotherdemo.mov")  //filename should match a movie or image file in the data/ directory
 n.sendMsg(\stop)
 n.sendMsg(\start, "yetanotherdemo.mov", 200)  //fade in over 200 frames
