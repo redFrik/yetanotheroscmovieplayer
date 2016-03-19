@@ -1,11 +1,11 @@
 # yetanotheroscmovieplayer
 play videofiles fullscreen via opensound control messages
 
-precompiled for **mac osx** (64bit) and **raspberry pi** (armv6, jessie).
+precompiled for **mac osx** and **raspberry pi**.
 
 written during my artist-in-residency at [Anglia Ruskin University](http://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016.
 
-built with [openFrameworks](http://openframeworks.cc) v0.9.3. tested on mac (osx 10.10.5), rpi2 and rpi3 (raspbian-jessie).
+built with [openFrameworks](http://openframeworks.cc) v0.9.3. tested on mac (osx 64bit 10.10.5), rpi1, rpi2 and rpi3 (raspbian-jessie).
 
 installation & startup - osx
 --
@@ -20,7 +20,7 @@ installation & startup - rpi
 
 open a terminal window and type:
 
-* `git clone https://github.com/redFrik/yetanotheroscmovieplayer.git`
+* `git clone git://github.com/redFrik/yetanotheroscmovieplayer --depth 1`
 * `cd yetanotheroscmovieplayer`
 * `sudo apt-get install libfreeimage-dev`
 * `./yetanotheroscmovieplayer_rpi` (and a black window should fill the screen)
@@ -96,3 +96,19 @@ this simple application was built using openFrameworks and you can easily modify
   * cd to that folder and type `make -j 4`
   * the resulting application will be in the `bin` folder
   * use `yetanotheroscmovieplayer_rpitft` to build for tft screens. also install the [ofxPiTFT](http://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
+
+jessie-lite
+--
+
+The standalone also works under jessie-lite if the following additional packages are installed...
+
+* `sudo apt-get install git gstreamer1.0 libboost-filesystem1.55.0`
+
+then follow the 'installation & startup - rpi' above.
+
+autostart
+--
+
+type `crontab -e` and add the following line to the end...
+
+`@reboot yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi`
