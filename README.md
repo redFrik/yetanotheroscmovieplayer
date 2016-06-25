@@ -106,7 +106,7 @@ The standalone also works under jessie-lite if the following additional packages
 
 * `sudo apt-get install git gstreamer1.0 libboost-filesystem1.55.0`
 
-then follow the [installation & startup - rpi](#installation & startup - rpi) above.
+then follow the [installation & startup - rpi](#installation--startup---rpi) above.
 
 autostart
 --
