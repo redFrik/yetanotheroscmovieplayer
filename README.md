@@ -27,6 +27,8 @@ open a terminal window and type:
 
 now copy your own images and/or movie files into the **data** directory and start sending osc commands from python, javascript, puredata, supercollider or whatever - see testcode below.
 
+it is also recommended to increase the rpi's gpu memory to >= 128. do that by typing `sudo raspi-config` and select memory split under advanced options.
+
 protocol
 --
 
@@ -51,7 +53,7 @@ notes
 * also for the rpitft version to avoid flicker you will want to log out and exit the raspbian desktop before starting this app (via ssh or startup script).
 * on rpi to automatically start at boot type `sudo crontab -e` and add `@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi` to the end.
 * and to hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
-* if it does not start on rpi: make sure you have memory split in raspi-config set to something => 64.
+* if playing video files fail on rpi make sure you have memory split in raspi-config set to something => 128.
 
 testcode
 --
@@ -104,7 +106,7 @@ The standalone also works under jessie-lite if the following additional packages
 
 * `sudo apt-get install git gstreamer1.0 libboost-filesystem1.55.0`
 
-then follow the 'installation & startup - rpi' above.
+then follow the [installation & startup - rpi](#installation & startup - rpi) above.
 
 autostart
 --
@@ -112,3 +114,8 @@ autostart
 type `crontab -e` and add the following line to the end...
 
 `@reboot yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi`
+
+todo:
+--
+* volume command and try with sound
+* preload command
