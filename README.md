@@ -60,7 +60,7 @@ testcode
 
 (also see `examples` folder)
 
-```
+```supercollider
 //--supercollider
 n= NetAddr("raspberrypi.local", 61000)  //if app is running on a rpi
 n= NetAddr("127.0.0.1", 61000)  //if app is running locally on this mac
