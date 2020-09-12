@@ -3,14 +3,14 @@ play videofiles fullscreen via opensound control messages
 
 precompiled for **mac osx** and **raspberry pi**.
 
-written during my artist-in-residency at [Anglia Ruskin University](http://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016.
+written during my artist-in-residency at [Anglia Ruskin University](https://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016.
 
-built with [openFrameworks](http://openframeworks.cc) v0.9.3. tested on mac (osx 64bit 10.10.5), rpi1, rpi2 and rpi3 (raspbian-jessie).
+built with [openFrameworks](https://openframeworks.cc) v0.9.3. tested on mac (osx 64bit 10.10.5), rpi1, rpi2 and rpi3 (raspbian-jessie).
 
 installation & startup - osx
 --
 
-* download and extract the zip archive from <http://github.com/redFrik/yetanotheroscmovieplayer>
+* download and extract the zip archive from <https://github.com/redFrik/yetanotheroscmovieplayer>
 * double click `yetanotheroscmovieplayer_osx.app` (and a black window should fill the screen)
 
 now copy your own images and/or movie files into the **data** directory and start sending osc commands from python, javascript, puredata, supercollider or whatever - see testcode below.
@@ -85,7 +85,7 @@ n.sendMsg(\mode, 3)  //scale to fit height (crop width)
 
 this simple application was built using openFrameworks and you can easily modify it and/or build it for other operating systems that oF supports.
 
-* download and install [openFrameworks](http://openframeworks.cc/download/) for your platform.
+* download and install [openFrameworks](https://openframeworks.cc/download/) for your platform.
 * follow the oF setup guide and make sure you can compile example projects.
 * on osx:
   * copy the folder `yetanotheroscmovieplayer_osx` into `of_v0.9.3_osx_release/apps/myApps/`
@@ -97,7 +97,7 @@ this simple application was built using openFrameworks and you can easily modify
   * copy the folder `yetanotheroscmovieplayer_rpi` into `openFrameworks/apps/myApps/`
   * cd to that folder and type `make -j 4`
   * the resulting application will be in the `bin` folder
-  * use `yetanotheroscmovieplayer_rpitft` to build for tft screens. also install the [ofxPiTFT](http://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
+  * use `yetanotheroscmovieplayer_rpitft` to build for tft screens. also install the [ofxPiTFT](https://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
 
 jessie-lite
 --
@@ -119,3 +119,4 @@ todo:
 --
 * volume command and try with sound
 * preload command
+* quit command
