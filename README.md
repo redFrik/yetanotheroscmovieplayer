@@ -1,38 +1,58 @@
 # yetanotheroscmovieplayer
-play videofiles fullscreen via opensound control messages
+Play videofiles fullscreen via OpenSound Control messages.
 
-precompiled for **mac osx** and **raspberry pi**.
+Precompiled for **macOS** and **Raspberry Pi OS**.
 
-written during my artist-in-residency at [Anglia Ruskin University](https://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), cambridge spring 2016.
+Written during my artist-in-residency at [Anglia Ruskin University](https://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), Cambridge spring 2016.
 
-built with [openFrameworks](https://openframeworks.cc) v0.9.3. tested on mac (osx 64bit 10.10.5), rpi1, rpi2 and rpi3 (raspbian-jessie).
+Built with [openFrameworks](https://openframeworks.cc) v0.11.0 under macOS (64bit 10.12.6) and under RPi OS (32-bit Buster).
 
-installation & startup - osx
+For older operating system, download builds from the [releases](https://github.com/redFrik/yetanotheroscmovieplayer/releases) page.
+
+Installation & startup - macOS
 --
 
-* download and extract the zip archive from <https://github.com/redFrik/yetanotheroscmovieplayer>
-* double click `yetanotheroscmovieplayer_osx.app` (and a black window should fill the screen)
+* Download and extract the zip archive from <https://github.com/redFrik/yetanotheroscmovieplayer>
+* Double click `yetanotheroscmovieplayer_osx.app`
 
-now copy your own images and/or movie files into the **data** directory and start sending osc commands from python, javascript, puredata, supercollider or whatever - see testcode below.
+and a black window should fill the screen. Press '`i`' to see the status and `ESC` to exit.
 
-installation & startup - rpi
+Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see testcode below.
+
+Installation & startup - RPi OS
 --
 
-open a terminal window and type:
+First open a terminal window and type...
 
-* `git clone git://github.com/redFrik/yetanotheroscmovieplayer --depth 1`
-* `cd yetanotheroscmovieplayer`
-* `sudo apt-get install libfreeimage-dev`
-* `./yetanotheroscmovieplayer_rpi` (and a black window should fill the screen)
+```bash
+sudo raspi-config
+```
 
-now copy your own images and/or movie files into the **data** directory and start sending osc commands from python, javascript, puredata, supercollider or whatever - see testcode below.
+Increase the RPi's GPU memory to >= 128 and select GL (Fake KMS) under Advanced Options / GL Driver.
 
-it is also recommended to increase the rpi's gpu memory to >= 128. do that by typing `sudo raspi-config` and select memory split under advanced options.
+Next install this software and additional libraries by typing...
 
-protocol
+```bash
+sudo apt-get update
+sudo apt-get install libglfw3 libfreeimage3 libboost-filesystem1.67.0 liburiparser1
+git clone git://github.com/redFrik/yetanotheroscmovieplayer --depth 1
+```
+
+To start type...
+
+```bash
+cd yetanotheroscmovieplayer
+./yetanotheroscmovieplayer_rpi
+```
+
+and a black window should fill the screen. Press '`i`' to see the status and `ctrl+c` to exit.
+
+Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see testcode below.
+
+Protocol
 --
 
-send opensoundcontrol (osc) messages to **port 61000**
+Send open sound control (OSC) messages to **port 61000**
 
 ```
 /start, filename, fadeinframes, loopmode
@@ -43,26 +63,28 @@ send opensoundcontrol (osc) messages to **port 61000**
 /info, status
 ```
 
-notes
+Notes
 --
 
-* because the files are loaded from disk (sd-card) when started there might be a small delay.  a preload command that enables fast triggering is on my TODO.
-* there is also a special rpi build for [Adafruit's PiTFT display](https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi?view=all). start it with `./yetanotheroscmovieplayer_rpitft`.
-* palindrome looping does not yet work in the raspberry pi version.
-* negative speed (backwards) does not yet work in the raspberry pi version.
-* also for the rpitft version to avoid flicker you will want to log out and exit the raspbian desktop before starting this app (via ssh or startup script).
-* on rpi to automatically start at boot type `sudo crontab -e` and add `@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi` to the end.
-* and to hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
-* if playing video files fail on rpi make sure you have memory split in raspi-config set to something => 128.
+* Because the files are loaded from disk (SD card) when started there might be a small delay. A preload command that enables fast triggering is on my TODO.
+* There is also a special RPi build for [Adafruit's PiTFT display](https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi?view=all). Start it with `./yetanotheroscmovieplayer_rpitft`.
+* Palindrome looping does not yet work in the Raspberry Pi version.
+* Negative speed (backwards) does not yet work in the Raspberry Pi version.
+* Also, for the rpitft version to avoid flicker you will want to log out and exit the desktop before starting this app (via SSH or startup script).
+* On RPi to automatically start at boot type `sudo crontab -e` and add `@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi` to the end.
+* To hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
+* If playing video files fail on RPi make sure you have memory split in raspi-config set to something => 128.
+* The error `[ error ] ofAppGLFWWindow: 65544: X11: The DISPLAY environment variable is missing` might appear if running via SSH. The command `export DISPLAY=:0.0` should make the error go away. Or log in via VNC and try.
+* This is not working under Raspberry Pi OS Lite at the moment (tried with `sudo apt-get install xorg libgstreamer-plugins-base1.0-0`).
 
-testcode
+Testcode
 --
 
 (also see `examples` folder)
 
 ```supercollider
 //--supercollider
-n= NetAddr("raspberrypi.local", 61000)  //if app is running on a rpi
+n= NetAddr("raspberrypi.local", 61000)  //if app is running on a RPi
 n= NetAddr("127.0.0.1", 61000)  //if app is running locally on this mac
 n.sendMsg(\start, "yetanotherdemo.mov")  //filename should match a movie or image file in the data/ directory
 n.sendMsg(\stop)
@@ -80,43 +102,34 @@ n.sendMsg(\mode, 2)  //scale to fit width (crop height)
 n.sendMsg(\mode, 3)  //scale to fit height (crop width)
 ```
 
-(advanced) build instructions
+(Advanced) Build instructions
 --
 
-this simple application was built using openFrameworks and you can easily modify it and/or build it for other operating systems that oF supports.
+This simple application was built using openFrameworks and you can easily modify it and/or build it for other operating systems that oF supports.
 
-* download and install [openFrameworks](https://openframeworks.cc/download/) for your platform.
-* follow the oF setup guide and make sure you can compile example projects.
-* on osx:
-  * copy the folder `yetanotheroscmovieplayer_osx` into `of_v0.9.3_osx_release/apps/myApps/`
-  * open the file `yetanotheroscmovieplayer_osx.xcodeproj` in xcode
-  * make sure the target is `yetanotheroscmovieplayer_osx Release`
-  * build (cmd+b)
-  * the resulting application will be in the `bin` folder
-* on rpi:
-  * copy the folder `yetanotheroscmovieplayer_rpi` into `openFrameworks/apps/myApps/`
-  * cd to that folder and type `make -j 4`
-  * the resulting application will be in the `bin` folder
-  * use `yetanotheroscmovieplayer_rpitft` to build for tft screens. also install the [ofxPiTFT](https://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
+* Download and install [openFrameworks](https://openframeworks.cc/download/) for your platform.
+* Follow the oF setup guide and make sure you can compile example projects.
+* On macOS:
+  * Copy the folder `sourcecode/yetanotheroscmovieplayer_osx` into `of_v0.11.0_osx_release/apps/myApps/`
+  * Open the file `yetanotheroscmovieplayer_osx.xcodeproj` in Xcode.
+  * Make sure the target is `yetanotheroscmovieplayer_osx Release`
+  * Build (Cmd+b)
+  * The resulting application will be in the `bin` folder.
+* On RPi:
+  * Copy the folder `sourcecode/yetanotheroscmovieplayer_rpi` into `openFrameworks/apps/myApps/`
+  * Change directory to that folder with `cd` and type `make -j 4`
+  * The resulting application will be in the `bin` folder.
+  * Use `yetanotheroscmovieplayer_rpitft` to build for TFT screens. Also install the [ofxPiTFT](https://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
 
-jessie-lite
+Autostart
 --
 
-The standalone also works under jessie-lite if the following additional packages are installed...
-
-* `sudo apt-get install git gstreamer1.0 libboost-filesystem1.55.0`
-
-then follow the [installation & startup - rpi](#installation--startup---rpi) above.
-
-autostart
---
-
-type `crontab -e` and add the following line to the end...
+On Raspberry Pi type `crontab -e` and add the following line to the end...
 
 `@reboot yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi`
 
-todo:
+Todo:
 --
-* volume command and try with sound
-* preload command
-* quit command
+* Volume command and try with sound
+* Preload command
+* Quit command
