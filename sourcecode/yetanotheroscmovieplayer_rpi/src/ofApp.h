@@ -49,6 +49,7 @@ public:
     int loopMode;       //current type of looping
     int frames;         //number of frames in file
     float speed;        //current playback rate
+    float volume;       //current volume
     float alpha;        //current alphachannel for fading
     float steps;        //number of alpha steps per frame for fading in/out
     int ow, oh;         //original media dimensions

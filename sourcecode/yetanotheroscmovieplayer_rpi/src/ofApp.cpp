@@ -10,6 +10,7 @@ void ofApp::setup(){
     fileName= "";
     frames= 0;
     speed= 1.0;
+    volume= 1.0;
     mode= SCALE;
     alpha= 0.f;
     steps= 255.f;
@@ -89,6 +90,19 @@ void ofApp::update() {
                 speed= msg.getArgAsFloat(0);
                 videoPlayer.setSpeed(speed);
             }
+        } else if(adr=="/frame") {
+            if(num>0) {
+                videoPlayer.setFrame(msg.getArgAsInt(0));
+            }
+        } else if(adr=="/position") {
+            if(num>0) {
+                videoPlayer.setPosition(msg.getArgAsFloat(0));
+            }
+        } else if(adr=="/volume") {
+            if(num>0) {
+                volume= msg.getArgAsFloat(0);
+                videoPlayer.setVolume(volume);
+            }
         } else if(adr=="/mode") {
             if(num>0) {
                 modes m[4] = {SCALE, ORIGINAL, WIDTH, HEIGHT};
@@ -129,6 +143,8 @@ void ofApp::update() {
             } else {
                 info= !info;
             }
+        } else if(adr=="/exit") {
+            ofExit();
         }
     }
     if((type==MOVIE)&&(state!=STOPPED)) {
@@ -177,8 +193,9 @@ void ofApp::draw(){
         ofDrawBitmapString("loopMode: "+ofToString(loopMode), 30, 190);
         ofDrawBitmapString("frames: "+ofToString(frames), 30, 210);
         ofDrawBitmapString("speed: "+ofToString(speed), 30, 230);
-        ofDrawBitmapString("alpha: "+ofToString(alpha), 30, 250);
-        ofDrawBitmapString("state: "+stateToString(state), 30, 270);
+        ofDrawBitmapString("volume: "+ofToString(volume), 30, 250);
+        ofDrawBitmapString("alpha: "+ofToString(alpha), 30, 270);
+        ofDrawBitmapString("state: "+stateToString(state), 30, 290);
     }
 }
 void ofApp::keyReleased(int key) {
