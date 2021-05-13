@@ -40,4 +40,4 @@ app.send_message('/mode', 1) #no scaling (original dimensions)
 app.send_message('/mode', 2) #scale to fit width (crop height)
 app.send_message('/mode', 3) #scale to fit height (crop width)
 
-app.send_message('/exit', [])
+app.send_message('/exit', []) #quit app

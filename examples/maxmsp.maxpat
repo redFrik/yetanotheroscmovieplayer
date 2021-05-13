@@ -42,9 +42,9 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 112.0, 458.0, 73.0, 20.0 ],
+					"patching_rect" : [ 112.0, 458.0, 53.0, 20.0 ],
 					"style" : "",
-					"text" : "quit the app"
+					"text" : "quit app"
 				}
 
 			}
