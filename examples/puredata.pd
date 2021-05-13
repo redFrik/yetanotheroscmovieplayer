@@ -1,4 +1,4 @@
-#N canvas 132 45 635 461 10;
+#N canvas 132 45 639 550 10;
 #X msg 14 13 connect 127.0.0.1 61000;
 #X obj 140 265 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
@@ -6,8 +6,8 @@
 #X text 213 70 fade out over 300 frames;
 #X floatatom 140 223 5 1 99 0 - - -;
 #X floatatom 140 307 5 0 0 0 - - -;
-#X floatatom 140 350 5 0 0 0 - - -;
-#X text 208 349 display mode;
+#X floatatom 140 442 5 0 0 0 - - -;
+#X text 208 441 display mode;
 #X text 208 307 set playback rate;
 #X text 205 222 set framerate;
 #X text 206 265 toggle info (also key 'i');
@@ -16,7 +16,7 @@
 #X obj 14 91 netsend -u -b;
 #X obj 24 49 list prepend send;
 #X obj 24 67 list trim;
-#X obj 140 367 oscformat /mode;
+#X obj 140 459 oscformat /mode;
 #X obj 140 324 oscformat /speed;
 #X obj 140 282 oscformat /info;
 #X obj 140 240 oscformat /fps;
@@ -29,17 +29,24 @@
 #X msg 184 47 yetanotherdemo.mov 200 1;
 #X text 179 10 filename should match a movie or image file in the data
 directory;
-#X obj 140 430 oscformat /exit;
-#X obj 140 413 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 140 506 oscformat /exit;
+#X obj 140 489 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X text 208 412 quit app;
+#X text 208 488 quit app;
 #X text 497 47 0 - no loop;
 #X text 497 57 1 - normal loop;
 #X text 497 68 2 - palindrome;
-#X text 303 342 0 - fill screen (ignore original aspect ratio);
-#X text 303 353 1 - no scaling (original dimensions);
-#X text 303 364 2 - scale to fit width (crop height);
-#X text 303 375 3 - scale to fit height (crop width);
+#X text 303 434 0 - fill screen (ignore original aspect ratio);
+#X text 303 445 1 - no scaling (original dimensions);
+#X text 303 456 2 - scale to fit width (crop height);
+#X text 303 467 3 - scale to fit height (crop width);
+#X obj 140 368 oscformat /frame;
+#X text 208 351 jump to frame in movie;
+#X text 208 395 jump to frame in jump to position in movie (0.0-1.0)
+;
+#X obj 140 412 oscformat /position;
+#X msg 140 350 150;
+#X msg 140 394 0.5;
 #X connect 0 0 13 0;
 #X connect 1 0 18 0;
 #X connect 4 0 19 0;
@@ -60,3 +67,7 @@ directory;
 #X connect 26 0 24 0;
 #X connect 28 0 14 0;
 #X connect 29 0 28 0;
+#X connect 38 0 14 0;
+#X connect 41 0 14 0;
+#X connect 42 0 38 0;
+#X connect 43 0 41 0;

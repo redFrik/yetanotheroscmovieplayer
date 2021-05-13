@@ -58,6 +58,8 @@ Send open sound control (OSC) messages to **port 61000**
 /start, filename, fadeinframes, loopmode
 /stop, fadeoutframes
 /speed, playbackrate
+/frame, movieframe
+/position, percentage
 /mode, scalingmode
 /fps, framespersecond
 /info, status
@@ -67,6 +69,7 @@ Send open sound control (OSC) messages to **port 61000**
 Notes
 --
 
+* Jumping backwards in a movie is slow. Try encoding your video as PhotoJPEG or other similar non Motion JPEG format.
 * Because the files are loaded from disk (SD card) when started there might be a small delay. A preload command that enables fast triggering is on my TODO.
 * There is also a special RPi build for [Adafruit's PiTFT display](https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi?view=all). Start it with `./yetanotheroscmovieplayer_rpitft`.
 * Palindrome looping does not yet work in the Raspberry Pi version.
@@ -97,6 +100,8 @@ n.sendMsg(\start, "yetanotherdemo.mov", 100, 0)  //loop off (0= no loop, 1= norm
 n.sendMsg(\info)  //toggle info (also key 'i')
 n.sendMsg(\fps, 15)  //set framerate
 n.sendMsg(\speed, 0.5)  //set playback rate
+n.sendMsg(\frame, 150)  //jump to frame in movie
+n.sendMsg(\position, 0.5)  //jump to position in movie (0.0-1.0)
 n.sendMsg(\mode, 0)  //fill screen (ignore original aspect ratio)
 n.sendMsg(\mode, 1)  //no scaling (original dimensions)
 n.sendMsg(\mode, 2)  //scale to fit width (crop height)
@@ -113,9 +118,9 @@ This simple application was built using openFrameworks and you can easily modify
 * Follow the oF setup guide and make sure you can compile example projects.
 * On macOS:
   * Copy the folder `sourcecode/yetanotheroscmovieplayer_osx` into `of_v0.11.0_osx_release/apps/myApps/`
-  * Open the file `yetanotheroscmovieplayer_osx.xcodeproj` in Xcode.
+  * Open the file `yetanotheroscmovieplayer_osx.xcodeproj` in Xcode or `yetanotheroscmovieplayer_osx.code-workspace` in VSCodium or VSCode.
   * Make sure the target is `yetanotheroscmovieplayer_osx Release`
-  * Build (Cmd+b)
+  * Build (Cmd+b in Xcode, Cmd+Shift+P - run build task in VSC)
   * The resulting application will be in the `bin` folder.
 * On RPi:
   * Copy the folder `sourcecode/yetanotheroscmovieplayer_rpi` into `openFrameworks/apps/myApps/`
@@ -134,4 +139,3 @@ Todo:
 --
 * Volume command and try with sound
 * Preload command
-* Quit command

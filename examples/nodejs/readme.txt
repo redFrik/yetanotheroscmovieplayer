@@ -36,6 +36,12 @@ sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //set framerate
 buf= osc.toBuffer({address:'/speed', args:[0.5]})
 sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //set playback rate
 
+buf= osc.toBuffer({address:'/frame', args:[150]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //jump to frame in movie
+
+buf= osc.toBuffer({address:'/position', args:[0.5]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //jump to position in movie (0.0-1.0)
+
 buf= osc.toBuffer({address:'/mode', args:[0]})
 sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //fill screen (ignore original aspect ratio)
 buf= osc.toBuffer({address:'/mode', args:[1]})

@@ -26,6 +26,12 @@
     <br>/speed
     <input type="number" id="speed" value="1.0">
     <button id="sendSpeed">send</button>
+    <br>/frame
+    <input type="number" id="frame" value="150">
+    <button id="sendFrame">send</button>
+    <br>/position
+    <input type="number" id="position" value="0.5">
+    <button id="sendPosition">send</button>
     <br>/mode
     <input type="number" id="mode" value="0">
     <button id="sendMode">send</button>
@@ -57,6 +63,16 @@
     document.getElementById('sendSpeed').addEventListener('click', function() {
         socket.emit('speed', {
             speed: document.getElementById('speed').value
+        });
+    });
+    document.getElementById('sendFrame').addEventListener('click', function() {
+        socket.emit('frame', {
+            frame: document.getElementById('frame').value
+        });
+    });
+    document.getElementById('sendPosition').addEventListener('click', function() {
+        socket.emit('position', {
+            position: document.getElementById('position').value
         });
     });
     document.getElementById('sendMode').addEventListener('click', function() {

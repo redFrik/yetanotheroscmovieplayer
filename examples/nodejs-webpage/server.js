@@ -40,6 +40,12 @@ io.on('connection', function(socket) {
     socket.on('speed', function(data) {
         sendOsc('/speed', [parseFloat(data.speed.trim()||1)]);
     });
+    socket.on('frame', function(data) {
+        sendOsc('/frame', [parseInt(data.frame.trim()||150)]);
+    });
+    socket.on('position', function(data) {
+        sendOsc('/position', [parseFloat(data.position.trim()||0.5)]);
+    });
     socket.on('mode', function(data) {
         sendOsc('/mode', [parseInt(data.mode.trim()||0)]);
     });
