@@ -52,6 +52,7 @@ public:
     float speed;        //current playback rate
     float alpha;        //current alphachannel for fading
     float steps;        //number of alpha steps per frame for fading in/out
+    float volume;       //current volume
     int ow, oh;         //original media dimensions
     int x, y, w, h;     //drawing dimensions
     bool info;          //display info flag
