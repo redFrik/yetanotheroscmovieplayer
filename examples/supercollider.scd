@@ -11,6 +11,7 @@ n.sendMsg(\start, "yetanotherdemo.mov", 100, 1)  //loop off (0= no loop, 1= norm
 n.sendMsg(\info)  //toggle info (also key 'i')
 n.sendMsg(\fps, 15)  //set framerate
 n.sendMsg(\speed, 0.5)  //set playback rate
+n.sendMsg(\volume, 0.25)  //set volume (0.0-1.0)
 n.sendMsg(\frame, 150)  //jump to frame in movie
 n.sendMsg(\position, 0.5)  //jump to position in movie (0.0-1.0)
 n.sendMsg(\mode, 0)  //fill screen (ignore original aspect ratio)

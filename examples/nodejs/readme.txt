@@ -36,6 +36,9 @@ sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //set framerate
 buf= osc.toBuffer({address:'/speed', args:[0.5]})
 sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //set playback rate
 
+buf= osc.toBuffer({address:'/volume', args:[0.25]})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //set volume (0.0-1.0)
+
 buf= osc.toBuffer({address:'/frame', args:[150]})
 sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //jump to frame in movie
 

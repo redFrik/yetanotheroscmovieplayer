@@ -35,6 +35,8 @@ app.send_message('/fps', 15) #set framerate
 
 app.send_message('/speed', 0.5) #set playback rate
 
+app.send_message('/volume', 0.25) #set volume (0.0-1.0)
+
 app.send_message('/frame', 150) #jump to frame in movie
 
 app.send_message('/position', 0.5) #jump to position in movie (0.0-1.0)

@@ -40,11 +40,14 @@ io.on('connection', function(socket) {
     socket.on('speed', function(data) {
         sendOsc('/speed', [parseFloat(data.speed.trim()||1)]);
     });
+    socket.on('volume', function(data) {
+        sendOsc('/volume', [parseFloat(data.volume.trim()||1)]);
+    });
     socket.on('frame', function(data) {
-        sendOsc('/frame', [parseInt(data.frame.trim()||150)]);
+        sendOsc('/frame', [parseInt(data.frame.trim()||0)]);
     });
     socket.on('position', function(data) {
-        sendOsc('/position', [parseFloat(data.position.trim()||0.5)]);
+        sendOsc('/position', [parseFloat(data.position.trim()||0.0)]);
     });
     socket.on('mode', function(data) {
         sendOsc('/mode', [parseInt(data.mode.trim()||0)]);

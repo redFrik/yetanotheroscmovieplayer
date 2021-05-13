@@ -24,8 +24,11 @@
     <input type="number" id="fps" value="60">
     <button id="sendFps">send</button>
     <br>/speed
-    <input type="number" id="speed" value="1.0">
+    <input type="number" id="speed" value="0.5">
     <button id="sendSpeed">send</button>
+    <br>/volume
+    <input type="number" id="volume" value="0.25">
+    <button id="sendVolume">send</button>
     <br>/frame
     <input type="number" id="frame" value="150">
     <button id="sendFrame">send</button>
@@ -63,6 +66,11 @@
     document.getElementById('sendSpeed').addEventListener('click', function() {
         socket.emit('speed', {
             speed: document.getElementById('speed').value
+        });
+    });
+    document.getElementById('sendVolume').addEventListener('click', function() {
+        socket.emit('volume', {
+            volume: document.getElementById('volume').value
         });
     });
     document.getElementById('sendFrame').addEventListener('click', function() {

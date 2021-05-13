@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 562.0, 158.0, 665.0, 608.0 ],
+		"rect" : [ 535.0, 79.0, 666.0, 695.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,11 +38,52 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-20",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 378.5, 410.0, 69.0, 20.0 ],
+					"style" : "",
+					"text" : "set volume"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-21",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 307.0, 422.0, 69.0, 22.0 ],
+					"style" : "",
+					"text" : "/volume $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"format" : 6,
+					"id" : "obj-23",
+					"maxclass" : "flonum",
+					"maximum" : 1.0,
+					"minimum" : 0.0,
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 307.0, 397.0, 50.0, 22.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-12",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 378.5, 463.0, 191.0, 20.0 ],
+					"patching_rect" : [ 378.5, 523.0, 191.0, 20.0 ],
 					"style" : "",
 					"text" : "jump to position in movie (0.0-1.0)"
 				}
@@ -55,7 +96,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 307.0, 475.0, 72.0, 22.0 ],
+					"patching_rect" : [ 307.0, 535.0, 72.0, 22.0 ],
 					"style" : "",
 					"text" : "/position $1"
 				}
@@ -72,7 +113,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 307.0, 450.0, 50.0, 22.0 ],
+					"patching_rect" : [ 307.0, 510.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -83,7 +124,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 378.5, 412.0, 132.0, 20.0 ],
+					"patching_rect" : [ 378.5, 472.0, 132.0, 20.0 ],
 					"style" : "",
 					"text" : "jump to frame in movie"
 				}
@@ -96,7 +137,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 307.0, 424.0, 61.0, 22.0 ],
+					"patching_rect" : [ 307.0, 484.0, 61.0, 22.0 ],
 					"style" : "",
 					"text" : "/frame $1"
 				}
@@ -111,7 +152,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 307.0, 399.0, 50.0, 22.0 ],
+					"patching_rect" : [ 307.0, 459.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -148,7 +189,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 405.0, 530.0, 234.0, 60.0 ],
+					"patching_rect" : [ 405.0, 590.0, 234.0, 60.0 ],
 					"style" : "",
 					"text" : "0 - fill screen (ignore original aspect ratio)\n1 - no scaling (original dimensions)\n2 - scale to fit width (crop height)\n3 - scale to fit height (crop width)"
 				}
@@ -160,7 +201,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 378.5, 506.0, 81.0, 20.0 ],
+					"patching_rect" : [ 378.5, 566.0, 81.0, 20.0 ],
 					"style" : "",
 					"text" : "display mode"
 				}
@@ -173,7 +214,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 307.0, 539.0, 61.0, 22.0 ],
+					"patching_rect" : [ 307.0, 599.0, 61.0, 22.0 ],
 					"style" : "",
 					"text" : "/mode $1"
 				}
@@ -188,7 +229,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 307.0, 514.0, 50.0, 22.0 ],
+					"patching_rect" : [ 307.0, 574.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -486,8 +527,22 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-21", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-24", 0 ],
 					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-21", 0 ],
+					"source" : [ "obj-23", 0 ]
 				}
 
 			}
