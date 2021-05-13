@@ -1,7 +1,9 @@
-//first cd to this directory and
-pip install pyosc
+//note: if you have both python3 and python installed use pip3 and python3 below
 
-//if you’re on raspbian jessie you might need to install pyosc like this:
+//first cd to this directory and
+pip install python-osc
+
+//if you’re on raspbian you might need to install pyosc like this:
 git clone https://github.com/ptone/pyosc.git --depth 1
 cd pyosc
 sudo ./setup.py install
@@ -18,41 +20,24 @@ python stop.py
 
 
 //interactive examples (start by typing ’python’ in terminal)
-from OSC import OSCClient, OSCMessage
-app= OSCClient()
-app.connect(('127.0.0.1', 61000))
+from pythonosc import udp_client
+app= udp_client.SimpleUDPClient('127.0.0.1', 61000)
 
-msg= OSCMessage('/start')
-msg.append(['kjhkjh.png', 10])
-app.send(msg)  #fade in a still image
+app.send_message('/start', ['kjhkjh.png', 10]) #fade in a still image
 
-msg= OSCMessage('/stop')
-msg.append(10)
-app.send(msg)
+app.send_message('/stop', 10)
 
-msg= OSCMessage('/start')
-msg.append(['yetanotherdemo.mov', 100, 0])
-app.send(msg)  #loop off (0= no loop, 1= normal loop, 2= palindrome)
+app.send_message('/start', ['yetanotherdemo.mov', 100, 1]) #loop off (0= no loop, 1= normal loop, 2= palindrome)
 
-msg= OSCMessage('/info')
-app.send(msg)  #toggle info (also key 'i')
+app.send_message('/info', []) #toggle info (also key 'i')
 
-msg= OSCMessage('/fps')
-msg.append(15)
-app.send(msg)  #set framerate
+app.send_message('/fps', 15) #set framerate
 
-msg= OSCMessage('/speed')
-msg.append(0.5)
-app.send(msg)  #set playback rate
+app.send_message('/speed', 0.5) #set playback rate
 
-msg= OSCMessage('/mode')
-msg.insert(0, 0)
-app.send(msg)  #fill screen (ignore original aspect ratio)
-msg.insert(0, 1)
-app.send(msg)  #no scaling (original dimensions)
-msg.insert(0, 2)
-app.send(msg)  #scale to fit width (crop height)
-msg.insert(0, 3)
-app.send(msg)  #scale to fit height (crop width)
+app.send_message('/mode', 0) #fill screen (ignore original aspect ratio)
+app.send_message('/mode', 1) #no scaling (original dimensions)
+app.send_message('/mode', 2) #scale to fit width (crop height)
+app.send_message('/mode', 3) #scale to fit height (crop width)
 
-app.close()
+app.send_message('/exit', [])

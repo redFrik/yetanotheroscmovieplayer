@@ -45,4 +45,7 @@ sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //scale to fit width (crop hei
 buf= osc.toBuffer({address:'/mode', args:[3]})
 sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //scale to fit height (crop width)
 
+buf= osc.toBuffer({address:'/exit'})
+sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //quit app
+
 sck.close()

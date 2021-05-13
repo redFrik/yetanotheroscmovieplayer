@@ -15,3 +15,5 @@ n.sendMsg(\mode, 0)  //fill screen (ignore original aspect ratio)
 n.sendMsg(\mode, 1)  //no scaling (original dimensions)
 n.sendMsg(\mode, 2)  //scale to fit width (crop height)
 n.sendMsg(\mode, 3)  //scale to fit height (crop width)
+
+n.sendMsg(\exit)  //quit the app

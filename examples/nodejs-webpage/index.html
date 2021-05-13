@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="author" content="Fredrik Olofsson">
     <meta name="description" content="test webpage for yetanotheroscmovieplayer">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta name="viewport" content="width=device-width">
     <title>yetanotheroscmovieplayer webpage example</title>
     <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -29,6 +29,8 @@
     <br>/mode
     <input type="number" id="mode" value="0">
     <button id="sendMode">send</button>
+    <br>/exit
+    <button id="sendExit">send</button>
 
     <script>
     var socket = io.connect();
@@ -61,6 +63,9 @@
         socket.emit('mode', {
             mode: document.getElementById('mode').value
         });
+    });
+    document.getElementById('sendExit').addEventListener('click', function() {
+        socket.emit('exit', {});
     });
     </script>
 </body>

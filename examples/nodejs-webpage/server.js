@@ -43,6 +43,9 @@ io.on('connection', function(socket) {
     socket.on('mode', function(data) {
         sendOsc('/mode', [parseInt(data.mode.trim()||0)]);
     });
+    socket.on('exit', function(data) {
+        sendOsc('/exit', []);
+    });
 });
 http_server.listen(8080);
 console.log('open a webbrowser and go to 127.0.0.1:8080');

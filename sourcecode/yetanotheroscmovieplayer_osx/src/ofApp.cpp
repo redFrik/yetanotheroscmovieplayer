@@ -129,6 +129,8 @@ void ofApp::update() {
             } else {
                 info= !info;
             }
+        } else if(adr=="/exit") {
+            ofExit();
         }
     }
     if((type==MOVIE)&&(state!=STOPPED)) {
