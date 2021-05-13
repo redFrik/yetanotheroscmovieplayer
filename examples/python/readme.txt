@@ -1,21 +1,12 @@
-//note: if you have both python3 and python installed use pip3 and python3 below
-
 //first cd to this directory and
-pip install python-osc
-
-//if you’re on raspbian you might need to install pyosc like this:
-git clone https://github.com/ptone/pyosc.git --depth 1
-cd pyosc
-sudo ./setup.py install
-cd ..
+pip3 install python-osc
 
 //then start the yetanotheroscmovieplayer application
 //here we assume the app is running locally (127.0.0.1)
 
-
 //quick tests (from the terminal - assumes the app is running on 127.0.0.1)
-python startmovie.py
-python stop.py
+python3 startmovie.py
+python3 stop.py
 
 
 

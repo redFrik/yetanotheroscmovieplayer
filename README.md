@@ -1,11 +1,11 @@
 # yetanotheroscmovieplayer
-Play videofiles fullscreen via OpenSound Control messages.
+Fade in and out video and images fullscreen via OpenSound Control messages.
 
 Precompiled for **macOS** and **Raspberry Pi OS**.
 
 Written during my artist-in-residency at [Anglia Ruskin University](https://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), Cambridge spring 2016.
 
-Built with [openFrameworks](https://openframeworks.cc) v0.11.0 under macOS (64bit 10.12.6) and under RPi OS (32-bit Buster).
+Built with [openFrameworks](https://openframeworks.cc) v0.11.2 under macOS (64bit 10.14.6) and under RPi OS (32-bit Buster).
 
 For older operating system, download builds from the [releases](https://github.com/redFrik/yetanotheroscmovieplayer/releases) page.
 
@@ -15,7 +15,7 @@ Installation & startup - macOS
 * Download and extract the zip archive from <https://github.com/redFrik/yetanotheroscmovieplayer>
 * Double click `yetanotheroscmovieplayer_osx.app`
 
-and a black window should fill the screen. Press '`i`' to see the status and `ESC` to exit.
+and a black window should fill the screen. Type '`i`' to see the status and `ESC` to exit.
 
 Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see testcode below.
 
@@ -30,11 +30,9 @@ sudo raspi-config
 
 Increase the RPi's GPU memory to >= 128 and select GL (Fake KMS) under Advanced Options / GL Driver.
 
-Next install this software and additional libraries by typing...
+Next install this software by typing...
 
 ```bash
-sudo apt-get update
-sudo apt-get install libglfw3 libfreeimage3 libboost-filesystem1.67.0 liburiparser1
 git clone git://github.com/redFrik/yetanotheroscmovieplayer --depth 1
 ```
 
@@ -45,7 +43,7 @@ cd yetanotheroscmovieplayer
 ./yetanotheroscmovieplayer_rpi
 ```
 
-and a black window should fill the screen. Press '`i`' to see the status and `ctrl+c` to exit.
+and a black window should fill the screen. Type '`i`' to see the status and `ctrl+c` to exit.
 
 Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see testcode below.
 
@@ -80,7 +78,7 @@ Notes
 * To hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
 * If playing video files fail on RPi make sure you have memory split in raspi-config set to something => 128.
 * The error `[ error ] ofAppGLFWWindow: 65544: X11: The DISPLAY environment variable is missing` might appear if running via SSH. The command `export DISPLAY=:0.0` should make the error go away. Or log in via VNC and try.
-* This is not working under Raspberry Pi OS Lite at the moment (tried with `sudo apt-get install xorg libgstreamer-plugins-base1.0-0`).
+* This is not working under Raspberry Pi OS Lite at the moment (tried with `sudo apt-get install xorg libgstreamer-plugins-base1.0-0 libglfw3 libfreeimage3 libfreeimage3 libboost-filesystem1.67.0 liburiparser1`).
 
 Testcode
 --
@@ -119,14 +117,14 @@ This simple application was built using openFrameworks and you can easily modify
 * Download and install [openFrameworks](https://openframeworks.cc/download/) for your platform.
 * Follow the oF setup guide and make sure you can compile example projects.
 * On macOS:
-  * Copy the folder `sourcecode/yetanotheroscmovieplayer_osx` into `of_v0.11.0_osx_release/apps/myApps/`
+  * Copy the folder `sourcecode/yetanotheroscmovieplayer_osx` into `of_v0.11.2_osx_release/apps/myApps/`
   * Open the file `yetanotheroscmovieplayer_osx.xcodeproj` in Xcode or `yetanotheroscmovieplayer_osx.code-workspace` in VSCodium or VSCode.
   * Make sure the target is `yetanotheroscmovieplayer_osx Release`
   * Build (Cmd+b in Xcode, Cmd+Shift+P - run build task in VSC)
   * The resulting application will be in the `bin` folder.
 * On RPi:
   * Copy the folder `sourcecode/yetanotheroscmovieplayer_rpi` into `openFrameworks/apps/myApps/`
-  * Change directory to that folder with `cd` and type `make -j 4`
+  * Change directory to that folder with `cd` and type `make -j 3`
   * The resulting application will be in the `bin` folder.
   * Use `yetanotheroscmovieplayer_rpitft` to build for TFT screens. Also install the [ofxPiTFT](https://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
 
@@ -135,7 +133,7 @@ Autostart
 
 On Raspberry Pi type `crontab -e` and add the following line to the end...
 
-`@reboot yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi`
+`@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi`
 
 Todo:
 --
