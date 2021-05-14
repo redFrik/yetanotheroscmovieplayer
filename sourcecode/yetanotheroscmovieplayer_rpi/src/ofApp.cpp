@@ -45,7 +45,7 @@ void ofApp::update() {
                     if(isImage(fileName) && (fileName!=fileLast)) {
                         type= IMAGE;
                         videoPlayer.stop();
-                        videoPlayer.closeMovie();
+                        videoPlayer.close();
                         stillImage.load(fileName);
                         frames= 1;
                         ow= stillImage.getWidth();
@@ -54,7 +54,7 @@ void ofApp::update() {
                         if(fileName!=fileLast) {
                             type= MOVIE;
                             videoPlayer.stop();
-                            videoPlayer.closeMovie();
+                            videoPlayer.close();
                             videoPlayer.load(fileName);
                             frames= videoPlayer.getTotalNumFrames();
                             if(num>2) {
