@@ -9,17 +9,30 @@ Built with [openFrameworks](https://openframeworks.cc) v0.11.2 under macOS (64bi
 
 For older operating system, download builds from the [releases](https://github.com/redFrik/yetanotheroscmovieplayer/releases) page.
 
-Installation & startup - macOS
---
+# macOS
 
 * Download and extract the zip archive from <https://github.com/redFrik/yetanotheroscmovieplayer>
 * Double click `yetanotheroscmovieplayer_osx.app`
 
-and a black window should fill the screen. Type '`i`' to see the status and `ESC` to exit.
+and a black window should fill the screen. Type '`i`' to see the status and '`ESC`' to exit.
 
-Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see testcode below.
+Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see [protocol](#protocol) and [testcode](#testcode) below.
 
-Installation & startup - RPi OS
+Note that jumping backwards in time in a movie can be slow. Try encoding your video as PhotoJPEG or other similar non Motion JPEG format _or_ use the HPV version.
+
+macOS HPV
+--
+
+There is also a version for the [High Performance Video](https://github.com/vjacob/ofxHPVPlayer) Eco-system. This one is optimised for scrubbing and playing back high resolution video.
+
+A .hpv file can be created by first using ffmpeg to convert a video into a folder of png files, and then give that folder as input to [HPVCreator](https://github.com/HasseltVR/Holo_Toolset/releases). The first step, .mov to .png conversion, could look like...
+```bash
+ffmpeg -i input/yetanotherdemo.mov -vsync 0 dest/out%05d.png
+```
+
+# RPi OS
+
+Installation & startup
 --
 
 First open a terminal window and type...
@@ -43,12 +56,33 @@ cd yetanotheroscmovieplayer
 ./yetanotheroscmovieplayer_rpi
 ```
 
-and a black window should fill the screen. Type '`i`' to see the status and `ctrl+c` to exit.
+and a black window should fill the screen. Type '`i`' to see the status and '`ctrl+c`' to exit.
 
-Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see testcode below.
+Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see [protocol](#protocol) and [testcode](#testcode) below.
 
-Protocol
+Autostart
 --
+
+On Raspberry Pi type `crontab -e` and add the following line to the end...
+
+`@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi`
+
+RPi Notes
+--
+
+* Jumping backwards in time in a movie can be slow. Try encoding your video as PhotoJPEG or other similar non Motion JPEG format.
+* Because the files are loaded from disk (SD card) when started there might be a small delay. A preload command that enables fast triggering is on my TODO.
+* There is also a special RPi build for [Adafruit's PiTFT display](https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi?view=all). Start it with `./yetanotheroscmovieplayer_rpitft`.
+* Palindrome looping does not yet work in the Raspberry Pi version.
+* Negative speed (backwards) does not yet work in the Raspberry Pi version.
+* Also, for the rpitft version to avoid flicker you will want to log out and exit the desktop before starting this app (via SSH or startup script).
+* On RPi to automatically start at boot type `sudo crontab -e` and add `@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi` to the end.
+* To hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
+* If playing video files fail on RPi make sure you have memory split in raspi-config set to something => 128.
+* The error `[ error ] ofAppGLFWWindow: 65544: X11: The DISPLAY environment variable is missing` might appear if running via SSH. The command `export DISPLAY=:0.0` should make the error go away. Or log in via VNC and try.
+* This is not working under Raspberry Pi OS Lite at the moment (tried with `sudo apt-get install xorg libgstreamer-plugins-base1.0-0 libglfw3 libfreeimage3 libfreeimage3 libboost-filesystem1.67.0 liburiparser1`).
+
+# Protocol
 
 Send open sound control (OSC) messages to **port 61000**
 
@@ -65,25 +99,9 @@ Send open sound control (OSC) messages to **port 61000**
 /exit
 ```
 
-Notes
---
+# Testcode
 
-* Jumping backwards in a movie is slow. Try encoding your video as PhotoJPEG or other similar non Motion JPEG format.
-* Because the files are loaded from disk (SD card) when started there might be a small delay. A preload command that enables fast triggering is on my TODO.
-* There is also a special RPi build for [Adafruit's PiTFT display](https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi?view=all). Start it with `./yetanotheroscmovieplayer_rpitft`.
-* Palindrome looping does not yet work in the Raspberry Pi version.
-* Negative speed (backwards) does not yet work in the Raspberry Pi version.
-* Also, for the rpitft version to avoid flicker you will want to log out and exit the desktop before starting this app (via SSH or startup script).
-* On RPi to automatically start at boot type `sudo crontab -e` and add `@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi` to the end.
-* To hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
-* If playing video files fail on RPi make sure you have memory split in raspi-config set to something => 128.
-* The error `[ error ] ofAppGLFWWindow: 65544: X11: The DISPLAY environment variable is missing` might appear if running via SSH. The command `export DISPLAY=:0.0` should make the error go away. Or log in via VNC and try.
-* This is not working under Raspberry Pi OS Lite at the moment (tried with `sudo apt-get install xorg libgstreamer-plugins-base1.0-0 libglfw3 libfreeimage3 libfreeimage3 libboost-filesystem1.67.0 liburiparser1`).
-
-Testcode
---
-
-(also see `examples` folder)
+(also see the `examples` folder)
 
 ```supercollider
 //--supercollider
@@ -122,18 +140,12 @@ This simple application was built using openFrameworks and you can easily modify
   * Make sure the target is `yetanotheroscmovieplayer_osx Release`
   * Build (Cmd+b in Xcode, Cmd+Shift+P - run build task in VSC)
   * The resulting application will be in the `bin` folder.
+  * Use `yetanotheroscmovieplayer_hpv` to build for HPV support. Also install the [ofxHPVPlayer](https://github.com/vjacob/ofxHPVPlayer) addon.
 * On RPi:
   * Copy the folder `sourcecode/yetanotheroscmovieplayer_rpi` into `openFrameworks/apps/myApps/`
   * Change directory to that folder with `cd` and type `make -j 3`
   * The resulting application will be in the `bin` folder.
   * Use `yetanotheroscmovieplayer_rpitft` to build for TFT screens. Also install the [ofxPiTFT](https://github.com/patriciogonzalezvivo/ofxPiTFT) addon.
-
-Autostart
---
-
-On Raspberry Pi type `crontab -e` and add the following line to the end...
-
-`@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi`
 
 Todo:
 --
