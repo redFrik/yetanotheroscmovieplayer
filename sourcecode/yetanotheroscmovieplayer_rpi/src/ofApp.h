@@ -15,6 +15,7 @@ enum states {
 enum media {
     NOTSET= 0,
     NOTFOUND,
+    NOTCOMPATIBLE,
     MOVIE,
     IMAGE
 };
@@ -27,14 +28,15 @@ enum modes {
 };
 
 class ofApp : public ofBaseApp{
-    
+
 public:
     void setup();
     void update();
     void draw();
-    
+    void exit();
+
     void keyReleased(int key);
-    
+
     ofxOscReceiver receiver;
     ofVideoPlayer videoPlayer;
     ofImage stillImage;
@@ -45,7 +47,6 @@ public:
     string modeToString(modes mode);
     string message;
     string fileName;    //current file
-    string fileLast;    //last loaded file
     int loopMode;       //current type of looping
     int frames;         //number of frames in file
     float speed;        //current playback rate

@@ -36,13 +36,13 @@ void ofApp::update() {
         if(adr=="/start") {
             if(num>0) {
                 fileName= msg.getArgAsString(0);
-                if(fileName==fileLast || (ofFile::doesFileExist(fileName)==true)) {
+                if(ofFile::doesFileExist(fileName)) {
                     loopMode= 1;        //default loopmode
                     steps= 255.f;      //default no fade in (255 per frame)
                     if(num>1) {
                         steps= 255.f/fmax(msg.getArgAsInt(1), 1.f);
                     }
-                    if(isImage(fileName) && (fileName!=fileLast)) {
+                    if(isImage(fileName)) {
                         type= IMAGE;
                         videoPlayer.stop();
                         videoPlayer.close();
@@ -51,9 +51,11 @@ void ofApp::update() {
                         ow= stillImage.getWidth();
                         oh= stillImage.getHeight();
                     } else {
-                        if(fileName!=fileLast) {
+                        if(ofToLower(fileName.substr(fileName.find_last_of(".")+1))!="hpv") {
                             type= MOVIE;
-                            videoPlayer.stop();
+                            if(videoPlayer.isPlaying()) {
+                                videoPlayer.stop();
+                            }
                             videoPlayer.close();
                             videoPlayer.load(fileName);
                             frames= videoPlayer.getTotalNumFrames();
@@ -67,13 +69,15 @@ void ofApp::update() {
                             } else {
                                 videoPlayer.setLoopState(OF_LOOP_NONE);
                             }
+                            videoPlayer.play();
+                            ow= videoPlayer.getWidth();
+                            oh= videoPlayer.getHeight();
+                        } else {
+                            cout<<"file "<<fileName<<" not compatible - do not use a .hpv\n";
+                            type= NOTCOMPATIBLE;
                         }
-                        videoPlayer.play();
-                        ow= videoPlayer.getWidth();
-                        oh= videoPlayer.getHeight();
                     }
                     state= FADEIN;
-                    fileLast= fileName;
                 } else {
                     cout<<"file "<<fileName<<" not found\n";
                     type= NOTFOUND;
@@ -179,6 +183,9 @@ void ofApp::draw(){
     } else if(type==NOTFOUND) {
         ofSetHexColor(0xFFFFFF);
         ofDrawBitmapString("file '"+fileName+"' not found!", 300, 300);
+    } else if(type==NOTCOMPATIBLE) {
+        ofSetHexColor(0xFFFFFF);
+        ofDrawBitmapString("file '"+fileName+"' not compatible - do not use a .hpv", 300, 300);
     }
     if(info) {
         ofSetHexColor(0xFFFFFF);
@@ -197,6 +204,8 @@ void ofApp::draw(){
         ofDrawBitmapString("alpha: "+ofToString(alpha), 30, 270);
         ofDrawBitmapString("state: "+stateToString(state), 30, 290);
     }
+}
+void ofApp::exit() {
 }
 void ofApp::keyReleased(int key) {
     if(key=='i') {
@@ -227,6 +236,7 @@ string ofApp::typeToString(media type) {
         case MOVIE: return "MOVIE";
         case IMAGE: return "IMAGE";
         case NOTFOUND: return "NOTFOUND";
+        case NOTCOMPATIBLE: return "NOTCOMPATIBLE";
         case NOTSET: return "";
         default: return "unknown";
     }
