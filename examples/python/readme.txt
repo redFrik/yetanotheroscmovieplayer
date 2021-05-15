@@ -18,7 +18,7 @@ app.send_message('/start', ['kjhkjh.png', 10]) #fade in a still image
 
 app.send_message('/stop', 10)
 
-app.send_message('/start', ['yetanotherdemo.mov', 100, 1]) #loop off (0= no loop, 1= normal loop, 2= palindrome)
+app.send_message('/start', ['yetanotherdemo.mov', 100, 1]) #loop off (0= no loop, 1= normal loop (default), 2= palindrome), an absolute path also works
 
 app.send_message('/info', []) #toggle info (also key 'i')
 

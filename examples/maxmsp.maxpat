@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 535.0, 79.0, 666.0, 695.0 ],
+		"rect" : [ 535.0, 79.0, 766.0, 666.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -37,6 +37,33 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-27",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 576.0, 13.0, 136.0, 20.0 ],
+					"presentation_rect" : [ 576.0, 16.0, 0.0, 0.0 ],
+					"style" : "",
+					"text" : "or use an absolute path"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-25",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 553.0, 39.0, 197.0, 22.0 ],
+					"presentation_rect" : [ 454.0, 38.0, 0.0, 0.0 ],
+					"style" : "",
+					"text" : "/start /some/place/video.mov 200 1"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-20",
 					"maxclass" : "comment",
@@ -409,9 +436,9 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 488.0, 61.0, 94.0, 47.0 ],
+					"patching_rect" : [ 457.0, 61.0, 141.0, 47.0 ],
 					"style" : "",
-					"text" : "0 - no loop\n1 - normal loop\n2 - palindrome"
+					"text" : "0 - no loop\n1 - normal loop (default)\n2 - palindrome"
 				}
 
 			}
@@ -550,6 +577,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-24", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-25", 0 ]
 				}
 
 			}

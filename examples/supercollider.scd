@@ -4,10 +4,11 @@ n= NetAddr("127.0.0.1", 61000)  //if app is running locally on this mac
 n.sendMsg(\start, "yetanotherdemo.mov")  //filename should match a movie or image file in the data/ directory
 n.sendMsg(\stop)
 n.sendMsg(\start, "yetanotherdemo.mov", 200)  //fade in over 200 frames
+n.sendMsg(\start, "/some/place/video.mov")  //or use an absolute path
 n.sendMsg(\stop, 300)  //fade out over 300 frames
 n.sendMsg(\start, "kjhkjh.png", 10)  //fade in a still image
 n.sendMsg(\stop, 10)
-n.sendMsg(\start, "yetanotherdemo.mov", 100, 1)  //loop off (0= no loop, 1= normal loop, 2= palindrome)
+n.sendMsg(\start, "yetanotherdemo.mov", 100, 1)  //loop off (0= no loop, 1= normal loop (default), 2= palindrome)
 n.sendMsg(\info)  //toggle info (also key 'i')
 n.sendMsg(\fps, 15)  //set framerate
 n.sendMsg(\speed, 0.5)  //set playback rate

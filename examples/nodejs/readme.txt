@@ -24,7 +24,7 @@ sck.send(buf, 0, buf.length, 61000, '127.0.0.1')  //fade in a still image
 buf= osc.toBuffer({address:'/stop', args:[10]})
 sck.send(buf, 0, buf.length, 61000, '127.0.0.1')
 
-buf= osc.toBuffer({address:'/start', args:['yetanotherdemo.mov', 100, 0]})  //loop off (0= no loop, 1= normal loop, 2= palindrome)
+buf= osc.toBuffer({address:'/start', args:['yetanotherdemo.mov', 100, 0]})  //loop off (0= no loop, 1= normal loop (default), 2= palindrome), an absolute path also works
 sck.send(buf, 0, buf.length, 61000, '127.0.0.1')
 
 buf= osc.toBuffer({address:'/info'})

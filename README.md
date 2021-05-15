@@ -6,6 +6,7 @@ Precompiled for **macOS** and **Raspberry Pi OS**.
 Written during my artist-in-residency at [Anglia Ruskin University](https://www.anglia.ac.uk/arts-law-and-social-sciences/department-of-music-and-performing-arts), Cambridge spring 2016.
 
 Built with [openFrameworks](https://openframeworks.cc) v0.11.2 under macOS (64bit 10.14.6) and under RPi OS (32-bit Buster).
+Should also work under **Linux** and **Windows** but you will need to compile it yourself using openFrameworks.
 
 For older operating system, download builds from the [releases](https://github.com/redFrik/yetanotheroscmovieplayer/releases) page.
 
@@ -108,12 +109,13 @@ Send open sound control (OSC) messages to **port 61000**
 n= NetAddr("raspberrypi.local", 61000)  //if app is running on a RPi
 n= NetAddr("127.0.0.1", 61000)  //if app is running locally on this mac
 n.sendMsg(\start, "yetanotherdemo.mov")  //filename should match a movie or image file in the data/ directory
+n.sendMsg(\start, "/some/place/video.mov")  //or use an absolute path
 n.sendMsg(\stop)
 n.sendMsg(\start, "yetanotherdemo.mov", 200)  //fade in over 200 frames
 n.sendMsg(\stop, 300)  //fade out over 300 frames
 n.sendMsg(\start, "kjhkjh.png", 10)  //fade in a still image
 n.sendMsg(\stop, 10)
-n.sendMsg(\start, "yetanotherdemo.mov", 100, 0)  //loop off (0= no loop, 1= normal loop, 2= palindrome)
+n.sendMsg(\start, "yetanotherdemo.mov", 100, 0)  //loop off (0= no loop, 1= normal loop (default), 2= palindrome)
 n.sendMsg(\info)  //toggle info (also key 'i')
 n.sendMsg(\fps, 15)  //set framerate
 n.sendMsg(\speed, 0.5)  //set playback rate
