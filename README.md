@@ -19,7 +19,15 @@ and a black window should fill the screen. Type '`i`' to see the status and '`ES
 
 Now copy your own images and/or movie files into the **data** directory and start sending OSC commands from Python, JavaScript, PureData, SuperCollider or whatever - see [protocol](#protocol) and [testcode](#testcode) below.
 
-Note that jumping backwards in time in a movie can be slow. Try encoding your video as PhotoJPEG or other similar non Motion JPEG format _or_ use the HPV version.
+macOS Notes
+--
+
+* Jumping backwards in time in a movie can be slow. Try encoding your video as PhotoJPEG or other similar non Motion JPEG format _or_ use the HPV version.
+* To enable loading media files from the **data** directory you probably need to _un-quarantine_ the .app and remove translocation. You can do this either manually - by moving the application outside of the folder and back again - or with the following terminal command...
+  ```bash
+  xattr -cr yetanotheroscmovieplayer_osx.app
+  xattr -cr yetanotheroscmovieplayer_hpv.app
+  ```
 
 macOS HPV
 --
