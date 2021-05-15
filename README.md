@@ -85,7 +85,6 @@ RPi Notes
 * Palindrome looping does not yet work in the Raspberry Pi version.
 * Negative speed (backwards) does not yet work in the Raspberry Pi version.
 * Also, for the rpitft version to avoid flicker you will want to log out and exit the desktop before starting this app (via SSH or startup script).
-* On RPi to automatically start at boot type `sudo crontab -e` and add `@reboot /home/pi/yetanotheroscmovieplayer/yetanotheroscmovieplayer_rpi` to the end.
 * To hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
 * If playing video files fail on RPi make sure you have memory split in raspi-config set to something => 128.
 * The error `[ error ] ofAppGLFWWindow: 65544: X11: The DISPLAY environment variable is missing` might appear if running via SSH. The command `export DISPLAY=:0.0` should make the error go away. Or log in via VNC and try.
