@@ -88,7 +88,7 @@ RPi Notes
 * To hide the blinking login cursor when automatically string type `sudo nano /boot/cmdline.txt` and add `vt.global_cursor_default=0` to the line.
 * If playing video files fail on RPi make sure you have memory split in raspi-config set to something => 128.
 * The error `[ error ] ofAppGLFWWindow: 65544: X11: The DISPLAY environment variable is missing` might appear if running via SSH. The command `export DISPLAY=:0.0` should make the error go away. Or log in via VNC and try.
-* This is not working under Raspberry Pi OS Lite at the moment (tried with `sudo apt-get install xorg libgstreamer-plugins-base1.0-0 libglfw3 libfreeimage3 libfreeimage3 libboost-filesystem1.67.0 liburiparser1`).
+* This is not working under Raspberry Pi OS Lite at the moment (tried with `sudo apt-get install xorg libgstreamer-plugins-base1.0-0 libglfw3 libfreeimage3 libboost-filesystem1.67.0 liburiparser1`).
 
 # Protocol
 
